@@ -1,0 +1,21 @@
+﻿services:
+  testtaskt4:
+    build:
+      context: .
+      dockerfile: TestTaskT4/Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - ConnectionStrings__Default=Host=db;Database=finance;Username=postgres;Password=postgres
+
+  db:
+    image: postgres:16
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: finance
+    ports:
+      - "5432:5432"
